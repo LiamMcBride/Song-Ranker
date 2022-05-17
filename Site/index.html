@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Song Grader</title>
+    <link rel="icon" href="Images/icon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="content">
+        <h1>Song Grader</h1>
+        <h2>Currently Playing</h2>
+        <img class="album-art" src="Images/exampleart.jpg" >
+        <p class="song-title">This Songs Title</p>
+        <p class="song-author">By: Liam McBride</p>
+        <form>
+            <h2>How would you rate this song?</h2>
+            <p>Overall: <input type="range" id="rating" name="rating" min="1" max="5"></p>
+            <p>How did it make you feel?</p>
+            <div class="type-div">
+                <label><input type="checkbox" id="type-passion" name="type-passion">Passionate</label>
+                <br>
+                <label><input type="checkbox" id="type-fun" name="type-fun">Fun</label>
+                <br>
+                <label><input type="checkbox" id="type-sad" name="type-sad">Sad</label>
+                <br>
+                <label><input type="checkbox" id="type-calm" name="type-calm">Calm</label>
+                <br>
+                <label><input type="checkbox" id="type-angry" name="type-angry">Angry</label>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

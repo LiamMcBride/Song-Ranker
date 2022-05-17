@@ -1,0 +1,32 @@
+.content{
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+h1, h2, p{
+    text-align: center;
+}
+
+.album-art{
+    width: 300px;
+    height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.song-title{
+    font-weight: bold;
+    font-size: large;
+}
+
+.song-author{
+    font-size: small;
+}
+
+.type-div{
+    width: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+}
