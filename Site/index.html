@@ -13,7 +13,7 @@
         <!-- <div id="song-div" class="song-div"></div> -->
         <p id="title" class="song-title">This Songs Title</p>
         <p id="author" class="song-author">By: Liam McBride</p>
-        <form>
+        <form id="form" method="post">
             <h2>How would you rate this song?</h2>
             <p>Overall: <input type="range" id="rating" name="rating" min="1" max="5"></p>
             <p>How did it make you feel?</p>
@@ -27,6 +27,8 @@
                 <label><input type="checkbox" id="type-calm" name="type-calm">Calm</label>
                 <br>
                 <label><input type="checkbox" id="type-angry" name="type-angry">Angry</label>
+                <br>
+                <input type="submit" value="Submit">
             </div>
         </form>
     </div>
