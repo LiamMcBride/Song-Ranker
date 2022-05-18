@@ -10,6 +10,10 @@ function setArt(url){
     document.getElementById("album-art").src = url;
 }
 
+function setAuthorRankLabel(author){
+    document.getElementById("author-rank-label").innerText = "Was this a plus or minus for " + author;
+}
+
 function getTitle(){
     return document.getElementById("title").value;
 }
@@ -26,6 +30,7 @@ function getData(){
         setTitle(song);
         setAuthor(artist);
         setArt(url);
+        setAuthorRankLabel(artist);
     })
 }
 
