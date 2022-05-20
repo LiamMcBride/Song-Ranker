@@ -1,3 +1,5 @@
+//const { get } = require("express/lib/response");
+
 function setTitle(title){
     document.getElementById("title").innerText = title;
 }
@@ -27,30 +29,53 @@ function getData(){
         let song = json["song"];
         let artist = json["artist"];
         let url = json["art"];
-        setTitle(song);
-        setAuthor(artist);
-        setArt(url);
-        setAuthorRankLabel(artist);
+
+        if(getAuthor() != artist && getTitle() != song){
+            setTitle(song);
+            setAuthor(artist);
+            setArt(url);
+            setAuthorRankLabel(artist);
+        }
     })
 }
 
 let form = document.getElementById("form");
+//form.addEventListener('submit', )
 form.addEventListener('submit', function(e){
+    e.preventDefault();
     let rating = document.getElementById("rating").value;
+    let bodyData = {
+        artist: "Joe",
+        song: "Poopy",
+        rating: 3
+    };
 
-    fetch("http://localhost:105/submit/1234", {
+    // bodyData = JSON.stringify(bodyData);
+    // bodyData = bodyData.trim();
+    
+    fetch("http://localhost:105/submit/", {
         method: "POST",
-        body: JSON.stringify({
-            artist: getAuthor(),
-            song: getTitle(),
-            rating: rating
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    }).then(function(response){
-        return response.json()
-    })
+        // headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json'
+        // },
+        // body: JSON.stringify({
+        //     artist: getAuthor(),
+        //     song: getTitle(),
+        //     rating: rating
+        // }
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(bodyData)
+        
+    }).then((response) => {
+        console.log("fuck");
+        return response.json();
+    }).then((data) => {
+        console.log("Success:", data);
+    }).catch((error) => {
+        console.error("Error:", error);
+    });
 })
 
 getData();

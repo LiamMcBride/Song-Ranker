@@ -15,15 +15,18 @@ def welcome():
 def current_song():
     return SpotifyAPI().getCurrentSongJson()
 
-@app.route('/submit/<rand>', methods=['POST'])
-@cross_origin
-def submit(rand):
-    submission = request.json
-    f = open("testFile.txt", "a")
-    f.write(rand)
-    f.close()
+# @cross_origin
+@app.route('/submit/', methods=['GET', 'POST'])
+def submit():
+    if request.method != 'GET':
+        print("Request recieved")
+        submission = request
+        print(submission)
+        return "Success", 200
+
+    return "Failed"
 
 if __name__ == '__main__':
-    app.config['CORS_HEADERS'] = 'Content-Type'
-    app.run(host='0.0.0.0', port=105)
-    app.config['CORS_HEADERS'] = 'Content-Type'
+    #app.config['CORS_HEADERS'] = 'Content-Type'
+    app.run(host='0.0.0.0', port=105, debug=True)
+    #app.config['CORS_HEADERS'] = 'Content-Type'
