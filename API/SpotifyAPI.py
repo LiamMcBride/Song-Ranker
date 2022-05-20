@@ -2,7 +2,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from SpotifySecret import CLIENT_ID, CLIENT_SECRET, REDIRECT_LINK
 from urllib.request import urlopen
-import json
 
 class SpotifyAPI():
     def __init__(self):
@@ -28,6 +27,7 @@ class SpotifyAPI():
             return "No Song Playing", "None", "None"
         artist = results["item"]["artists"][0]['name']
         song = results["item"]['name']
+        album = results["item"]["album"]["name"]
         photoArt = results["item"]["album"]["images"][0]["url"]
 
         
@@ -35,12 +35,13 @@ class SpotifyAPI():
         x = {
             "artist": artist,
             "song": song,
+            "album": album,
             "art": photoArt
         }
         
 
-        return json.dumps(x)
+        return (x)
 
 api = SpotifyAPI()
 
-print(api.getCurrentSongData())
+print(api.getCurrentSongJson())

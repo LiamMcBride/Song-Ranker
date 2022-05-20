@@ -1,5 +1,5 @@
 //const { get } = require("express/lib/response");
-
+let album = "";
 function setTitle(title){
     document.getElementById("title").innerText = title;
 }
@@ -17,11 +17,30 @@ function setAuthorRankLabel(author){
 }
 
 function getTitle(){
-    return document.getElementById("title").value;
+    return document.getElementById("title").innerText;
 }
 
 function getAuthor(){
-    return document.getElementById("author").value;
+    return document.getElementById("author").innerText;
+}
+
+function getFeelings(){
+    let feelings = "";
+    let chkBox = [];
+    chkBox.push(document.getElementById("type-hype"));
+    chkBox.push(document.getElementById("type-fun"));
+    chkBox.push(document.getElementById("type-sad"));
+    chkBox.push(document.getElementById("type-calm"));
+    chkBox.push(document.getElementById("type-angry"));
+
+    for(let i = 0; i < chkBox.length; i++){
+        console.log(chkBox[i].value);
+        if(chkBox[i].checked){
+            feelings += chkBox[i].value + ", ";
+        }
+    }
+    console.log(feelings);
+    return feelings;  
 }
 
 function getData(){
@@ -29,6 +48,7 @@ function getData(){
         let song = json["song"];
         let artist = json["artist"];
         let url = json["art"];
+        album = json["album"];
 
         if(getAuthor() != artist && getTitle() != song){
             setTitle(song);
@@ -45,37 +65,22 @@ form.addEventListener('submit', function(e){
     e.preventDefault();
     let rating = document.getElementById("rating").value;
     let bodyData = {
-        artist: "Joe",
-        song: "Poopy",
-        rating: 3
+        artist: getAuthor(),
+        song: getTitle(),
+        album: album,
+        rating: rating,
+        feeling: getFeelings()
     };
 
-    // bodyData = JSON.stringify(bodyData);
-    // bodyData = bodyData.trim();
+    console.log(bodyData);
     
     fetch("http://localhost:105/submit/", {
-        method: "POST",
-        // headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json'
-        // },
-        // body: JSON.stringify({
-        //     artist: getAuthor(),
-        //     song: getTitle(),
-        //     rating: rating
-        // }
-        mode: 'cors',
-        cache: 'default',
-        body: JSON.stringify(bodyData)
-        
-    }).then((response) => {
-        console.log("fuck");
-        return response.json();
-    }).then((data) => {
-        console.log("Success:", data);
-    }).catch((error) => {
-        console.error("Error:", error);
-    });
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: JSON.stringify(bodyData),
+      });
 })
 
 getData();
